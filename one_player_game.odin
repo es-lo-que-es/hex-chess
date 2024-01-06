@@ -23,6 +23,7 @@ start_one_player_game :: proc(using self: ^HexChess)
 handle_one_player_game :: proc(using self: ^HexChess)
 {
    if game.state == .SwitchingTurns do one_player_game_turn_switch(self);
+   else if game.state == .Quiting do end_one_player_game(self);
 }
 
 
@@ -49,4 +50,5 @@ one_player_game_turn_switch :: proc(using self: ^HexChess)
 end_one_player_game :: proc(using self: ^HexChess)
 {
    display = &main_menu;
+   game.state = .Over;
 }

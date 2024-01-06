@@ -3,7 +3,7 @@ package hexchess_logic
 import "core:fmt"
 
 
-GameState :: enum { Ongoing, PawnUpgrade, SwitchingTurns };
+GameState :: enum { Ongoing, PawnUpgrade, SwitchingTurns, Quiting, Over };
 
 
 Game :: struct {
@@ -123,7 +123,10 @@ process_move :: proc(using self: ^Game, move: ^Move)
 {
    apply_move(move, self);
    append(&history, move^);
+
    self.state  = move.upgrade ? .PawnUpgrade : .SwitchingTurns;
+
+   invalidate_point(&selected);
    clear(&moves);
 }
 

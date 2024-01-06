@@ -12,10 +12,13 @@ GameDisplay :: struct {
    using display: Display,
 
    cons:          GameDisplayConstants,
+
    upgrade:       UpgradeDisplay,
-   
+   exit_button:   Button,
+
    texture:       ^sdl2.Texture,
    game:          ^logic.Game,
+
    flipped:       bool,
 
 };
@@ -115,6 +118,13 @@ init_board_texture :: proc(using self: ^GameDisplay) -> bool
 }
 
 
+exit_button_cb :: proc(btn: ^Button, par: rawptr)
+{
+   game := (^GameDisplay)(par).game;
+   game.state = .Quiting;
+}
+
+
 init_game_display :: proc(using self: ^GameDisplay, r: sdl2.Rect, g: ^logic.Game) -> bool
 {
    ok := false;
@@ -127,6 +137,11 @@ init_game_display :: proc(using self: ^GameDisplay, r: sdl2.Rect, g: ^logic.Game
    defer if !ok do release_upgrade_display(&upgrade);
 
    init_board_texture(self) or_return;
+
+   s: i32 = 60;
+   br: sdl2.Rect = { r.x + r.w - s, r.y, s, s };
+   init_button(&exit_button, br, .XButton, {240, 240, 240, 255});
+   set_button_cb(&exit_button, exit_button_cb, self);
    
    event_loop = game_display_event_loop;
    draw_method = render_game_display;
@@ -153,6 +168,8 @@ render_game_display :: proc(ptr: ^Display)
    if flipped do render_flipped(globals.renderer, texture, nil, &rect);
    else do sdl2.RenderCopy(globals.renderer, texture, nil, &rect);
 
+   render(&exit_button);
+
    highlight(self);
    render_moves(self);
    render_pieces(self);
@@ -170,12 +187,15 @@ game_display_event_loop :: proc(ptr: ^Display, e: ^sdl2.Event)
       point := click_index(self, {e.motion.x, e.motion.y});
       logic.select_cell(game, point);
    }
+
+   handle_event(&exit_button, e);
 }
 
 
 reset_game_display :: proc(using self: ^GameDisplay, g: ^logic.Game)
 {
    flipped = g.player == .Black;
+
    upgrade.game = g;
    game = g;
 }
