@@ -14,12 +14,12 @@ init_main_menu :: proc(using self: ^MainMenu, r: sdl2.Rect) -> bool
 {
    // TODO: take this from config
    col: sdl2.Color = { 62, 62, 62, 250 };
-   items: []Texture = { .WhiteKnight, .BlackRook };
+   items: []Texture = { .OnePlayerGame, .ExitButton };
 
    init_tile_display(&menu_items, r, col, items) or_return;
 
-   sw := r.w / 7;
-   sr: sdl2.Rect = { (r.w - sw) / 2, r.h-sw-20, sw, sw };
+   sw := r.w / 8;
+   sr: sdl2.Rect = { (r.w - sw) / 2, r.h-sw-20, sw, i32(f32(sw)*0.8) };
    init_color_switch(&color_switch, sr);
 
    event_loop = main_menu_event_loop;

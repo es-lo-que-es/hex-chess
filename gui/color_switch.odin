@@ -27,7 +27,7 @@ init_color_switch :: proc(using self: ^ColorSwitch, r: sdl2.Rect)
    back = globals.textures[Texture.BlackPawn];
    front = globals.textures[Texture.WhitePawn];
 
-   s := r.w / 14;
+   s := r.w / 20;
    front_rect = { r.x - s, r.y + s, r.w, r.h };
    back_rect = { r.x + s, r.y - s, r.w, r.h };
 

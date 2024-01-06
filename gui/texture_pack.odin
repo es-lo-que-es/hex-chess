@@ -13,7 +13,8 @@ Texture :: enum {
    WhiteQueen, BlackQueen,
    WhiteKnight, BlackKnight,
    WhiteBishop, BlackBishop,
-   XButton,
+   XButton, OnePlayerGame,
+   ExitButton,
 };
 
 
@@ -25,7 +26,8 @@ TEXTURE_PATH_ARR : [len(Texture)]cstring = {
    "pics/white_queen.png", "pics/black_queen.png",
    "pics/white_knight.png", "pics/black_knight.png",
    "pics/white_bishop.png", "pics/black_bishop.png",
-   "pics/xbutton.png",
+   "pics/xbutton.png", "pics/1p.png",
+   "pics/exit.png"
 };
 
 
