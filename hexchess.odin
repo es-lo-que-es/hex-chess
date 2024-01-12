@@ -98,4 +98,3 @@ main_loop :: proc (using self: ^HexChess)
       gui.draw(display);
    }
 }
-

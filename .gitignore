@@ -1,2 +1,9 @@
 hex-chess
 *~
+*.wasm
+*.data
+
+wasm/mycexports.js
+wasm/runtine.js
+
+build/

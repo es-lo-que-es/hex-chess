@@ -5,8 +5,9 @@ import "core:fmt"
 
 main :: proc()
 {  
-   hex_chess: HexChess;
+   when ODIN_ARCH == .wasm32 do return;
 
+   hex_chess: HexChess;
    ok := init_hex_chess(&hex_chess);
 
    if !ok  {
@@ -16,5 +17,4 @@ main :: proc()
 
    main_loop(&hex_chess);
    release_hex_chess(&hex_chess);
-
 }
