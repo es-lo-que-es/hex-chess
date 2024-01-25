@@ -13,13 +13,13 @@ MainMenu :: struct {
 init_main_menu :: proc(using self: ^MainMenu, r: sdl2.Rect) -> bool
 {
    // TODO: take this from config
-   col: sdl2.Color = { 62, 62, 62, 250 };
+   col: sdl2.Color = { 119, 149, 86, 255 };
    items: []Texture = { .OnePlayerGame, .ExitButton };
 
    init_tile_display(&menu_items, r, col, items) or_return;
 
    sw := r.w / 8;
-   sr: sdl2.Rect = { (r.w - sw) / 2, r.h-sw-20, sw, i32(f32(sw)*0.8) };
+   sr: sdl2.Rect = { 0, 0, sw, sw };
    init_color_switch(&color_switch, sr);
 
    event_loop = main_menu_event_loop;

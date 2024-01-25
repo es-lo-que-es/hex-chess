@@ -19,8 +19,8 @@ HexChess :: struct {
 // TODO: replace it all with config
 BG_COLOR: sdl2.Color: { 55, 55, 55, 255 };
 
-HEIGHT: i32: 800;
-WIDTH: i32: 800;
+HEIGHT: i32: 600;
+WIDTH: i32: 600;
 TICK: u32: 100;
 
 

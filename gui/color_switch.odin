@@ -68,10 +68,8 @@ render_color_switch :: proc(ptr: ^Display)
    self := (^ColorSwitch)(ptr);
    using self;
    
-   c: sdl2.Color: { 119, 149, 86, 255 };
-
-   if hovered do fill_rect(&rect, c);
-   else do fill_cell(c, &rect);
+   ch: sdl2.Color: { 119, 149, 86, 255 };
+   fill_rect(&rect, ch);
 
    sdl2.RenderCopy(globals.renderer, back, nil, &back_rect);
    sdl2.RenderCopy(globals.renderer, front, nil, &front_rect);

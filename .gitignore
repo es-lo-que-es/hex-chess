@@ -4,6 +4,6 @@ hex-chess
 *.data
 
 wasm/mycexports.js
-wasm/runtine.js
+wasm/runtime.js
 
 build/
